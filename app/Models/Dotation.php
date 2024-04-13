@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dotation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'Type' , 'isActive' , 'Puce'
+    ];
 }

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Puce extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'Type' , 'Fourniseur' , 'Puce' , 'Tel' , 'isActive'
+    ];
 }
