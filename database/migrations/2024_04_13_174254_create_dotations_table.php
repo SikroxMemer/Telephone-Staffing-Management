@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('dotations', function (Blueprint $table) {
             $table->id();
-
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('username');
-            $table->string('password');
-            $table->enum('type' , ['admin' , 'operateur' , 'observateur']);
-
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('type');
+            $table->boolean('is_active');
+            $table->unsignedBigInteger('puce')->index();
+            $table->foreign('puce')->references('id')->on('puces')->restrictOnDelete()->restrictOnUpdate();
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('dotation');
     }
 };

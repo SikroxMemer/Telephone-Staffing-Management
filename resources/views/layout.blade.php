@@ -7,7 +7,10 @@
     @vite('resources/css/app.css')
 </head>
 <body>
- @include('sidebar')
- @yield('dashboard')
+    @include('sidebar')
+    @yield('dashboard')
+    @yield('affectation')
+    @yield('puce')
+    @yield('')
 </body>
 </html>

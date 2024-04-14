@@ -9,6 +9,6 @@ class Affectation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Puce' , 'Personnel' , 'Observation'
+        'puce' , 'personnel' , 'observation' , 'date_affectation'
     ];
 }
