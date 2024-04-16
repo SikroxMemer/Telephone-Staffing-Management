@@ -1,5 +1,7 @@
 @extends('layout')
+<title>Dashboard</title>
 @section('components.dashboard')
+
 <div class="p-5 sm:ml-64">
     
     <div class="p-4 drounded-lg  dark:border-gray-700">

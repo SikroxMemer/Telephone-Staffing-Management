@@ -73,6 +73,8 @@
                         <label for="default-radio-2"  class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Internet</label>
                     </div>
                 </div>
+
+            
             </div>
             
             <div class="flex items-start mb-6">

@@ -88,9 +88,9 @@ final class DotationTable extends PowerGridComponent
     }
 
     #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
+    public function edit($rowId)
     {
-        $this->js('alert('.$rowId.')');
+        return redirect()->route('dotation.edit' , ['dotation' => $rowId]);
     }
     #[\Livewire\Attributes\On('delete')]
     public function delete($rowId)
@@ -116,7 +116,7 @@ final class DotationTable extends PowerGridComponent
             Button::add('delete')
                 ->slot('Supprimer')
                 ->id()
-                ->class('w-17 text-white shadow-lg bg-red-500 dark:bg-red-500 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('w-18 text-white shadow-lg bg-red-400 dark:bg-red-400 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
                 ->dispatch('delete', ['rowId' => $row->id])
         ];
     }

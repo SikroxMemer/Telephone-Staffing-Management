@@ -31,11 +31,7 @@ class DotationController extends Controller
     public function store(Request $request)
     {
         try {
-            Dotation::create([
-                "type" => $request->type,
-                "puce" => $request->telephone,
-                "is_active" => true,
-            ]);
+            Dotation::create(["type" => $request->type,"puce" => $request->telephone,"is_active" => true,]);
             return redirect()
                 ->route("dotation.index")
                 ->with("success", "Vous avez ajouté une nouvelle dotation");
@@ -60,8 +56,13 @@ class DotationController extends Controller
      */
     public function edit(string $id)
     {
-        
-        return view("dotation.edit");
+        $puce = Puce::all()->where("is_active" , "=" , "1");
+        return view("dotation.edit" , 
+            [
+                'puce' => $puce ,
+                'dotation' => Dotation::find($id)
+            ]
+        );
     }
 
     /**
@@ -69,7 +70,26 @@ class DotationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if ($request->check == false)
+            return redirect()
+                ->route("dotation.edit", ['dotation' => $id])
+                ->with("danger", "Vous devez confirmer avant de mettre à jour les champs");
+
+        try {
+            Dotation::find($id)->update([
+                "type" => $request->type,
+                "puce" => $request->telephone,
+                "is_active" => $request->is_active,
+            ]);
+            return redirect()
+                ->route("dotation.index")
+                ->with("success", "Vous avez modifié la ligne #$id");
+        } catch (Exception $error) {
+            return redirect()
+                ->route("dotation.edit", ['dotation' => $id])
+                ->with("danger", "" . $error->getMessage());
+        }
+
     }
 
     /**

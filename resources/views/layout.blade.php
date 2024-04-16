@@ -7,7 +7,7 @@
         <link rel="shortcut icon" href="" type="image/x-icon">
         @vite('resources/css/app.css')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-
+        
     </head>
     <body>
         @include('components.sidebar')
