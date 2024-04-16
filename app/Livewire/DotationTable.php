@@ -2,7 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Affectation;
+use App\Models\Dotation;
+use App\Models\Puce;
 use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,10 +18,10 @@ use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class AffectationTable extends PowerGridComponent
+final class DotationTable extends PowerGridComponent
 {
     use WithExport;
-    public array $observation = [];
+
     public function setUp(): array
     {
         $this->showCheckBox();
@@ -29,9 +30,7 @@ final class AffectationTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-                
             Header::make()->showSearchInput(),
-
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -40,10 +39,8 @@ final class AffectationTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        
-        return Affectation::query()->join("personnels" , "affectations.personnel" , "=" , "personnels.id")
-            ->join("puces" , "affectations.puce" , "=" , "puces.id")
-            ->select("affectations.*" , "personnels.nom" , "personnels.prenom" , "puces.telephone");
+        return Dotation::query()->join("puces" , "dotations.puce" , "=" , "puces.id")
+            ->select("dotations.*" , "puces.telephone");
     }
 
     public function relationSearch(): array
@@ -55,80 +52,59 @@ final class AffectationTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
+            ->add('type')
+            ->add('is_active')
             ->add('telephone')
-            ->add('nom')
-            ->add('observation')
-            ->add('date_affectation_formatted', fn (Affectation $model) => Carbon::parse($model->date_affectation)->format('d/m/Y'))
             ->add('created_at');
     }
 
     public function columns(): array
     {
-       
         return [
-            Column::make('Id', 'id')
+            Column::make('Id', 'id'),
+            Column::make('Type', 'type')
+                ->sortable()
                 ->searchable(),
 
-            Column::make('Puce', 'telephone')
-                ->searchable(),
+            Column::make('Activé ?', 'is_active')
+                ->sortable()
+                ->searchable()
+                ->toggleable(false , "Activé" , "Désactivé"),
 
-            Column::make('Nom Personnel', 'nom')
-                ->searchable()    ,
-
-            Column::make('Prenom Personnel', 'prenom')
-                ->searchable(),
+            Column::make('Puce', 'telephone'),
             
-            Column::make('Observation', 'observation')
-                ->sortable()
-                ->searchable(),
-
-
-            Column::make('Date affectation', 'date_affectation_formatted', 'date_affectation')
-                ->sortable()
-                ->searchable(),
-
-
             Column::make('Créé à la date', 'created_at')
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Actions')
+            Column::action('Action')
         ];
     }
 
     public function filters(): array
     {
         return [
-            Filter::inputText('date_affectation'),
-            Filter::inputText('id'),
-            Filter::inputText('telephone'),
-            Filter::inputText('nom'),
-            Filter::inputText('prenom'),
-            Filter::inputText('observation'),
-            Filter::inputText('created_at'),
         ];
     }
 
     #[\Livewire\Attributes\On('edit')]
-
-    public function edit($rowId)
+    public function edit($rowId): void
     {
-        return redirect()->route('affectation.edit' , ['affectation' => $rowId]);
+        $this->js('alert('.$rowId.')');
     }
-
     #[\Livewire\Attributes\On('delete')]
     public function delete($rowId)
     {
         try { 
-            Affectation::find($rowId)->first()->delete();
-            return redirect()->route('affectation.index')->with('warning' , "Vous avez supprimé la ligne #$rowId");
+            Puce::find($rowId)->first()->delete();
+            return redirect()->route('puce.index')->with('warning' , "Vous avez supprimé la ligne #$rowId");
         }
         catch (Exception $error) {
-            return redirect()->route('affectation.index')->with('danger' , "" . $error->getMessage());
+            return redirect()->route('puce.index')->with('danger' , "" . $error->getMessage());
         }
     }
 
-    public function actions(Affectation $row): array
+    public function actions(Dotation $row): array
     {
         return [
             Button::add('edit')
@@ -140,16 +116,11 @@ final class AffectationTable extends PowerGridComponent
             Button::add('delete')
                 ->slot('Supprimer')
                 ->id()
-                ->class('w-19 text-white shadow-lg bg-red-500 dark:bg-red-500 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('w-17 text-white shadow-lg bg-red-500 dark:bg-red-500 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
                 ->dispatch('delete', ['rowId' => $row->id])
         ];
     }
 
-
-    public function onUpdatedEditable(string|int $id, string $field, string $value): void
-    {
-        Affectation::query()->find($id)->update([$field => $value]);
-    }
     /*
     public function actionRules($row): array
     {

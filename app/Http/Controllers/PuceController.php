@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\Puce;
 
 class PuceController extends Controller
 {
@@ -11,7 +13,7 @@ class PuceController extends Controller
      */
     public function index()
     {
-        //
+        return view("puce.index");
     }
 
     /**
@@ -19,7 +21,7 @@ class PuceController extends Controller
      */
     public function create()
     {
-        //
+        return view("puce.add");
     }
 
     /**
@@ -27,7 +29,22 @@ class PuceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Puce::create([
+                "type" => $request->type,
+                "fourniseur" => $request->fourniseur,
+                "telephone" => $request->telephone,
+                "is_active" => $request->is_active
+            ]);
+            return redirect()
+                ->route("puce.index")
+                ->with("success", "Vous avez ajouté une nouvelle puce");
+                
+        } catch (Exception $error) {
+            return redirect()
+                ->route("puce.create")
+                ->with("danger", "" . $error->getMessage());
+        }
     }
 
     /**
@@ -43,7 +60,7 @@ class PuceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("puce.edit" , ['puce' => Puce::find($id)]);
     }
 
     /**
@@ -51,7 +68,26 @@ class PuceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if ($request->check == false)
+            return redirect()
+                ->route("puce.edit", ['puce' => $id])
+                ->with("danger", "Vous devez confirmer avant de mettre à jour les champs");
+
+        try {
+            Puce::find($id)->update([
+                "type" => $request->type,
+                "fourniseur" => $request->fourniseur,
+                "telephone" => $request->telephone,
+                "is_active" => $request->is_active
+            ]);
+            return redirect()
+                ->route("puce.index")
+                ->with("success", "Vous avez modifié la ligne #$id");
+        } catch (Exception $error) {
+            return redirect()
+                ->route("puce.edit", ['puce' => $id])
+                ->with("danger", "" . $error->getMessage());
+        }
     }
 
     /**

@@ -27,7 +27,11 @@
 
 
           <li>
-             <a href="{{route('affectation')}}" class="flex items-center p-2  rounded-lg   {{Request::is('affectation') ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}}   group">
+             <a href="{{route('affectation.index')}}" class="flex items-center p-2  rounded-lg   
+                  {{ Route::currentRouteName() == "affectation.index" || 
+                     Route::currentRouteName() == "affectation.create"||
+                     Route::currentRouteName() == "affectation.edit"
+                     ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}}   group">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                   <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
                 </svg>
@@ -39,7 +43,10 @@
 
 
           <li>
-             <a href="#" class="flex items-center p-2  rounded-lg  {{Request::is('dotation') ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}} group">
+             <a  href="{{route('dotation.index')}}" class="flex items-center p-2  rounded-lg  
+                  {{ Route::currentRouteName() == "dotation.index" || 
+                     Route::currentRouteName() == "dotation.create"||
+                     Route::currentRouteName() == "dotation.edit" ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}} group">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                   <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />
                   <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd" />
@@ -64,7 +71,10 @@
 
       
           <li>
-             <a href="#" class="flex items-center p-2 0 rounded-lg  {{Request::is('puce') ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}} group">
+             <a href="{{route('puce.index')}}" class="flex items-center p-2 0 rounded-lg  
+               {{Route::currentRouteName() == "puce.index" || 
+               Route::currentRouteName() == "puce.create"||
+               Route::currentRouteName() == "puce.edit" ? 'bg-blue-400' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}} group">
                
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                   <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />

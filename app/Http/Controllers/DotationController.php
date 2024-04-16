@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dotation;
+use App\Models\Puce;
+use Exception;
 use Illuminate\Http\Request;
 
 class DotationController extends Controller
@@ -11,7 +14,7 @@ class DotationController extends Controller
      */
     public function index()
     {
-        //
+        return view("dotation.index");
     }
 
     /**
@@ -19,7 +22,7 @@ class DotationController extends Controller
      */
     public function create()
     {
-        //
+        return view("dotation.add" , ["puce" => Puce::all()]);
     }
 
     /**
@@ -27,7 +30,21 @@ class DotationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Dotation::create([
+                "type" => $request->type,
+                "puce" => $request->telephone,
+                "is_active" => true,
+            ]);
+            return redirect()
+                ->route("dotation.index")
+                ->with("success", "Vous avez ajouté une nouvelle dotation");
+                
+        } catch (Exception $error) {
+            return redirect()
+                ->route("dotation.create")
+                ->with("danger", "" . $error->getMessage());
+        }
     }
 
     /**
@@ -43,7 +60,8 @@ class DotationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        return view("dotation.edit");
     }
 
     /**

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AffectationController;
+use App\Http\Controllers\DotationController;
+use App\Http\Controllers\PuceController;
 use App\Models\Affectation;
 use App\Models\Dotation;
 use App\Models\Entity;
@@ -22,18 +25,23 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard' , 
+    return view('components.dashboard' , 
         [
-        'affectation' => Affectation::count() , 
-        'puce' => Puce::count() , 
-        'entity' => Entity::count() ,
-        'personnel' => Personnel::count() ,
-        'utilisateur' => User::count() , 
-        'dotation' => Dotation::count() ,
+            'affectation' => Affectation::count() , 
+            'puce' => Puce::count() , 
+            'entity' => Entity::count() ,
+            'personnel' => Personnel::count() ,
+            'utilisateur' => User::count() , 
+            'dotation' => Dotation::count() ,
         ]
     );
 })->name("dashboard");
 
-Route::get("/affectation", function () {
-    return view("affectation");
-})->name('affectation');
+
+Route::resources(
+    [
+        "affectation" => AffectationController::class ,
+        "puce" => PuceController::class , 
+        "dotation" => DotationController::class ,
+    ]
+);
