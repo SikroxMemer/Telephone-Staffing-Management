@@ -25,25 +25,25 @@
                     <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Identifiant
                     </label>
-                    <input name="id" type="text" id="id" readonly value="{{$affectation->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   />
+                    <input required name="id" type="text" id="id" readonly value="{{$affectation->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   />
                 </div>
                 <div>
                     <label for="observation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Observateur
                     </label>
-                    <input name="observation" type="text" id="observateur" value="{{$affectation->observation}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   />
+                    <input required name="observation" type="text" id="observateur" value="{{$affectation->observation}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"   />
                 </div>
 
         
                 <div>
                     <label for="date_affectation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date Affectation</label>
-                    <input name="date_affectation" type="date" value="{{$affectation->date_affectation}}" id="telephone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"  />
+                    <input required name="date_affectation" type="date" value="{{$affectation->date_affectation}}" id="telephone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"  />
                 </div>
 
                 <div>
                     <label  for="puce" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Puce</label>
                     
-                    <select name="puce" id="puce" 
+                    <select required name="puce" id="puce" 
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         
                         <option value="{{$affectation->Puce->id}}" selected>
@@ -67,7 +67,7 @@
                         Personnel
                     </label>
 
-                    <select name="personnel" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select required name="personnel" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 
                         <option value="{{$affectation->Personnel->id}}" selected>
                             {{$affectation->Personnel->nom}} {{$affectation->Personnel->prenom}}

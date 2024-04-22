@@ -114,19 +114,24 @@ final class PuceTable extends PowerGridComponent
 
     public function actions(Puce $row): array
     {
-        return [
-            Button::add('edit')
-                ->slot('Modifier')
-                ->id()
-                ->class('w-18 text-white shadow-lg bg-blue-400 dark:bg-blue-400 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id]) ,
-                
-            Button::add('delete')
-                ->slot('Supprimer')
-                ->id()
-                ->class('w-19 text-white shadow-lg bg-red-500 dark:bg-red-500 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('delete', ['rowId' => $row->id])
-        ];
+        if (auth()->user()['type'] == "admin" || auth()->user()['type'] == "oberateur") {
+            return [
+                Button::add('edit')
+                    ->slot('Modifier')
+                    ->id()
+                    ->class('w-18 text-white shadow-lg bg-blue-400 dark:bg-blue-400 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                    ->dispatch('edit', ['rowId' => $row->id]) ,
+                    
+                Button::add('delete')
+                    ->slot('Supprimer')
+                    ->id()
+                    ->class('w-19 text-white shadow-lg bg-red-600 dark:bg-red-500 p-1 rounded text-slate-400 dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                    ->dispatch('delete', ['rowId' => $row->id])
+            ];
+        }
+        else {
+            return [];
+        }
     }
 
     /*

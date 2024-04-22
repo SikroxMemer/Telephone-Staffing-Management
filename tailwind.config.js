@@ -17,7 +17,4 @@ export default {
           },
       },
    },
-    presets : [
-      require("./vendor/power-components/livewire-powergrid/tailwind.config.js"), 
-    ] , 
 };

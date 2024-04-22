@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entity;
+use Exception;
 use Illuminate\Http\Request;
 
 class EntityController extends Controller
@@ -11,7 +13,7 @@ class EntityController extends Controller
      */
     public function index()
     {
-        //
+        return view("entity.index");
     }
 
     /**
@@ -19,7 +21,7 @@ class EntityController extends Controller
      */
     public function create()
     {
-        //
+        return view("entity.add");
     }
 
     /**
@@ -27,9 +29,20 @@ class EntityController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try {
+            Entity::create(
+                [
+                    'nom' => $request->nom
+                ]
+            );
+            return redirect()->route('entity.index')->with('success', 'Vous avez ajouté une nouvelle entité');
 
+        } catch (Exception $error) {
+
+            return redirect()->route('entity.create')->with('error', '' . $error->getMessage());
+
+        }
+    }
     /**
      * Display the specified resource.
      */
@@ -37,13 +50,12 @@ class EntityController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        return view("entity.edit" , ['entity' => Entity::find($id)]);
     }
 
     /**
@@ -51,7 +63,25 @@ class EntityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        if ($request->check == false) {
+            return redirect()->route("entity.edit", ['entity' => $id])
+                ->with("danger", "Vous devez confirmer avant de mettre à jour les champs");
+        }
+
+        try {
+            Entity::find($id)->update(
+                [
+                    'nom' => $request->nom
+                ]
+            );
+            return redirect()->route('entity.index')->with('success', 'Vous avez modifié la ligne #$id');
+
+        } catch (Exception $error) {
+
+            return redirect()->route('entity.create' , ['entity' => $id])->with('error', '' . $error->getMessage());
+            
+        }
     }
 
     /**
