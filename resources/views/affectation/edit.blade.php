@@ -9,9 +9,10 @@
 
 
 
-        <div class="p-4 drounded-lg  dark:border-gray-700" x>
-        <h1 class="text-4xl text-black dark:text-white shadow-sm flex flex-row items-center">Modifier Affectation 
-            <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        <div class="p-4 drounded-lg  dark:border-gray-700">
+        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Modifier Affectation 
+            &nbsp;
+            <span class="text-blue-800">
                 #{{ $affectation->id }}
             </span>
         </h1>

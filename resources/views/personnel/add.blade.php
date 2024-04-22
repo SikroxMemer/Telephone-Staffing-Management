@@ -8,7 +8,7 @@
         @include('shared.danger-message')
 
         <div class="p-4 drounded-lg  dark:border-gray-700" x>
-        <h1 class="text-4xl text-black dark:text-white shadow-sm flex flex-row items-center">Ajouter Personnel</h1>
+        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Ajouter Personnel</h1>
         <br/>
 
         <form method="POST" action="{{route('personnel.store')}}">

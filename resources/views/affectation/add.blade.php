@@ -10,7 +10,7 @@
 
 
         <div class="p-4 drounded-lg  dark:border-gray-700" x>
-        <h1 class="text-4xl text-black dark:text-white shadow-sm flex flex-row items-center">Ajouter Affectation 
+        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Ajouter Affectation 
             
         </h1>
         <br/>

@@ -8,7 +8,10 @@
         @include('shared.danger-message')
 
         <div class="p-4 drounded-lg  dark:border-gray-700" x>
-        <h1 class="text-4xl text-black dark:text-white shadow-sm flex flex-row items-center">Modifier Dotation</h1>
+        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Modifier Dotation  &nbsp;
+            <span class="text-blue-800">
+                #{{ $dotation->id }}
+            </span></h1>
         <br/>
 
         <form method="POST" action="{{route('dotation.update' , ['dotation' => $dotation->id])}}">

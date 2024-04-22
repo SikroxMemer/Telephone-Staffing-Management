@@ -7,7 +7,10 @@
     @include('shared.danger-message')
 
     <div class="p-4 drounded-lg  dark:border-gray-700" x>
-        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Modifier Utilisateur</h1>
+        <h1 class="text-4xl text-black dark:text-white flex flex-row items-center">Modifier Utilisateur &nbsp;
+            <span class="text-blue-800">
+                #{{ $utilisateur->id }}
+            </span></h1>
         <br />
 
         <form method="POST" action="{{route('utilisateur.update' , ['utilisateur' => $utilisateur->id])}}">
